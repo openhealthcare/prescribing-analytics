@@ -5,16 +5,141 @@
 
 			<div class="inside">
 
-					<p><a href="http://test.prescribinganalytics.com/wp-content/uploads/2012/11/scrip-map-shot-7001.png"><img class="aligncenter" title="scrip-map-shot-700" src="http://test.prescribinganalytics.com/wp-content/uploads/2012/11/scrip-map-shot-7001.png" alt="" width="700" height="436" /></a></p>
+					<p>
+	<div id="map"></div>
+
+    <script src="/js/leaflet.js"></script>
+	<script type="text/javascript" src="/js/pct-data.js"></script>
+
+
 <p>link to visualisation bigger/ full screen in a new window?</p>
 <p>main page with visualisations of statin waste (as seen on prescriber analytics) &#8211; maybe should have a slider?</p>
 <p>&nbsp;</p>
 <p>wonder if a theme with a full width would be better? although supporting info probably good for home page?</p>
 
-
-
-
-
 						</div>
 		</div>
 	</div>
+
+
+	<script type="text/javascript">
+
+		var map = L.map('map').setView([53.0, -1.5], 6);
+
+		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+			key: 'BC9A493B41014CAABB98F0471D759707',
+			styleId: 22677
+		}).addTo(map);
+
+
+		// control that shows state info on hover
+		var info = L.control();
+
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info');
+			this.update();
+			return this._div;
+		};
+
+		info.update = function (props) {
+			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>' +  (props ?
+				'<b>' + props.PCO11NM + '</b><br />' + props.percentage + '% statins proprietary'
+				: 'Hover over a Primary Care Trust');
+		};
+
+		info.addTo(map);
+
+
+		// get color depending on population density value
+		function getColor(d) {
+			return d > 30  ? '#800026' :
+			       d > 26  ? '#BD0026' :
+			       d > 23  ? '#E31A1C' :
+			       d > 20  ? '#FC4E2A' :
+			       d > 16  ? '#FD8D3C' :
+			       d > 13  ? '#FEB24C' :
+			       d > 11  ? '#FED976' :
+			                 '#FFEDA0';
+		}
+
+		function style(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties.percentage)
+			};
+		}
+
+		function highlightFeature(e) {
+			var layer = e.target;
+
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer.bringToFront();
+			}
+
+			info.update(layer.feature.properties);
+		}
+
+		var geojson;
+
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update();
+		}
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+
+		geojson = L.geoJson(pctData, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map);
+
+		map.attributionControl.addAttribution('Prescription data from <a href="http://www.ic.nhs.uk/services/transparency/prescribing-by-gp-practice--chemical-level-data">NHS Information Centre</a>');
+
+
+		var legend = L.control({position: 'bottomright'});
+
+		legend.onAdd = function (map) {
+
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 11, 13, 16, 20, 23, 26, 30], // [0, 10, 20, 50, 100, 200, 500, 1000],
+				labels = [],
+				from, to;
+
+			for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColor(from + 1) + '"></i> ' +
+					from + (to ? '&ndash;' + to : '+'));
+			}
+
+			div.innerHTML = labels.join('<br>');
+			return div;
+		};
+
+		legend.addTo(map);
+
+	</script>

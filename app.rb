@@ -1,4 +1,11 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
 require 'sinatra'
+
+before do
+  content_type :html, 'charset' => 'utf-8'
+end
 
 get '/' do
   erb :index
@@ -6,26 +13,26 @@ end
 
 
 get '/analysis' do
-  erb :index
+  erb :analysis
 end
 
 get '/primer' do
-  erb :index
+  erb :primer
 end
 
 get '/wasteful' do
-  erb :index
+  erb :wasteful
 end
 
 get '/future' do
-  erb :index
+  erb :future
 end
 
 get '/contact' do
-  erb :index
+  erb :contact
 end
 
 get '/about' do
-  erb :index
+  erb :about
 end
 

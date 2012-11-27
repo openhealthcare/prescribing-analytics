@@ -28,11 +28,17 @@ get '/future' do
   erb :future
 end
 
+get '/about' do
+  erb :about
+end
+
 get '/contact' do
   erb :contact
 end
 
-get '/about' do
-  erb :about
+post '/contact' do
+  @submitted = true
+  @error = nil
+  erb :contact
 end
 

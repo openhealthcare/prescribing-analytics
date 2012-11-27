@@ -1,0 +1,14 @@
+
+<% if @submitted %>
+    Thank you for submitting your details
+<% end %>
+
+<form action="/contact" method="post">
+    <input type='text' name='name'/>
+    <input type='text' name='email'/>
+    I am an
+    <input type='radio' name="iam" value="NHS Employee"/> NHS Employee
+    <input type='radio' name="iam" value="Interested member of the public"/>Interested member of the public
+    <input type='radio' name="iam" value="Other"/>Other
+    <input type="submit" value='Send'/>
+</form>

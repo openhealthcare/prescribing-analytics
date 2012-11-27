@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 require 'sinatra'
-require 'Mail'
+require 'mail'
 
 if ENV['SENDGRID_USERNAME']
   Mail.defaults do

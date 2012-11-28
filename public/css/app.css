@@ -1,3 +1,5 @@
+body.custom-background { background-image: url('/img/bg.jpg'); background-repeat: no-repeat;
+background-position: top left; background-attachment: fixed; }
 
 #mainNav ul a, #mainNav ul li.sfHover ul a { color: #8f8f8f !important;	}
 	#mainNav ul li.current a,
@@ -42,14 +44,15 @@ blockquote, address {
 
 a { color: #3a8585;}
 a:hover {color: #f1532f;}
-.button, #searchsubmit, input[type="submit"] {background-color: #757575 !important;}
-.button:hover, #searchsubmit:hover, input[type="submit"]:hover {background-color: #595959 !important;}
+.button, #searchsubmit, input[type="submit"] {background-color: #f1532f !important;}
+.button:hover, #searchsubmit:hover, input[type="submit"]:hover {background-color: #78bc99 !important;}
 
 
-		#map {
-			width: 640px;
-			height: 480px;
-		}
+
+#map {
+	width: 640px;
+	height: 480px;
+}
 
 		.info {
 			padding: 6px 8px;

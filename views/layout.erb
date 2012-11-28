@@ -1,25 +1,20 @@
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Prescribing Analytics </title>
 	<meta name="viewport" content="width=device-width; initial-scale = 1.0; maximum-scale=1.0; user-scalable=no" />
-
-						<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" />
-
-	<link rel="stylesheet" href="/css/app.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" />
 	<link rel="stylesheet" href="/css/inktheme.css" type="text/css" media="screen" />
-
-<link rel="stylesheet" href="/css/leaflet.css" />
-<!--[if lte IE 8]><link rel="stylesheet" href="/css/leaflet.ie.css" /><![endif]-->
-
+			<link rel="shortcut icon" href="/img/favicon.png" />
+<link rel='stylesheet' id='superfish-css'  href='/css/app.css' type='text/css' media='all' />
 <link rel='stylesheet' id='superfish-css'  href='/css/superfish.css' type='text/css' media='all' />
+<link rel='stylesheet' href='/css/leaflet.css' type='text/css' media='all' />
 <link rel='stylesheet' id='slideshow-css'  href='/css/flexslider.css' type='text/css' media='all' />
+<script type='text/javascript' src='/js/jquery.js'></script>
+<link rel='next' title='About this site' href='/about' />
+<meta name="generator" content="" />
 <link rel='canonical' href='http://prescribinganalytics.com/' />
-<meta name="generator" content=" " />
-
 
 <!--[if IE 7]>
 <link rel="stylesheet" href="/css/ie7.css" type="text/css" media="screen" />
@@ -27,11 +22,6 @@
 <!--[if IE 8]>
 <link rel="stylesheet" href="/css/ie8.css" type="text/css" media="screen" />
 <![endif]-->
-
-
-<style type="text/css" id="custom-background-css">
-body.custom-background { background-image: url('/img/bg.jpg'); background-repeat: no-repeat; background-position: top left; background-attachment: fixed; }
-</style>
 
 </head>
 
@@ -43,39 +33,33 @@ body.custom-background { background-image: url('/img/bg.jpg'); background-repeat
 
 				<div id="logo">
 
-			<h1 class="logo"><a href="/"><img src="/img/sitelogo.jpg" alt="Prescribing Analytics" /></a></h1>
+			<h1 class="logo"><a href="/"><img src="/img/sitelogo.png" alt="Prescribing Analytics" /></a></h1>
 
 		</div>
 
 		<div id="mainNav" class="clearfix">
-			<div class="menu-menumain-container"><ul id="menu-menumain" class="sf-menu"><li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-82 current_page_item menu-item-113"><a href="/">Home/ Statin Waste</a></li>
-<li id="menu-item-109" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109"><a href="/analysis">Statin Analysis</a></li>
-<li id="menu-item-108" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-108"><a href="/primer">Why what your GP prescribes matters – A Primer</a></li>
-<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="/wasteful">Wasteful prescribing</a></li>
-<li id="menu-item-110" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110"><a href="/future">Future Plans</a></li>
-<li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112"><a href="/about">About this site</a></li>
+			<div class="menu-menumain-container"><ul id="menu-menumain" class="sf-menu"><li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page page-item-82 menu-item-113 <% if request.path == '/' %>current-menu-item page_item current_page_item<% end %>"><a href="/">Home</a></li>
+<li id="menu-item-109" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109 <% if request.path == '/analysis' %>current-menu-item page_item current_page_item<% end %>"><a href="/analysis">Detailed statin analysis</a></li>
+<li id="menu-item-108" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-108 <% if request.path == '/primer' %>current-menu-item page_item current_page_item<% end %>"><a href="/primer">Why prescriptions matter</a></li>
+<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111 <% if request.path == '/faq' %>current-menu-item page_item current_page_item<% end %>"><a href="/faq">FAQ</a></li>
+<li id="menu-item-110" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110 <% if request.path == '/future' %>current-menu-item page_item current_page_item<% end %>"><a href="/future">Future plans</a></li>
+<li id="menu-item-217" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-217 <% if request.path == '/methodology' %>current-menu-item page_item current_page_item<% end %>"><a href="/methodology">Methodology</a></li>
+<li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112 <% if request.path == '/about' %>current-menu-item page_item current_page_item<% end %>"><a href="/about">About this site</a></li>
 </ul></div>
-		</div>
+</div>
+
+
+
 		<div id="sidebar">
 			<div id="sidebar" class="clearfix">
 
-</div><div id="text-2" class="widget_text sidebarBox widgetBox"><h3>About Prescribing Analytics</h3>			<div class="textwidget"><p>Two line summary of the site &#8211; Lorem ipsum dolor sit amet, consectetur adipiscing elit.  </p>
+    <div id="text-2" class="widget_text sidebarBox widgetBox"><h3>About Prescribing Analytics</h3>			<div class="textwidget"><p>Prescribing Analytics is a joint venture of a group of UK technologists and NHS doctors, who believe in the power of data and technology to help the NHS.   </p>
 <p>Drop us an email at <a href="mailto: info@prescribinganalytics.com">info@prescribinganalytics.com</a></p>
 </div>
-		</div>
-		<div id="text-4" class="widget_text sidebarBox widgetBox">
-		    <h3>Sign up Form</h3>
-		    <div class="textwidget">
-		        <p>sign up form for people wanting to help</p>
-
-            </div>
-		</div>
-		<div id="text-3" class="widget_text sidebarBox widgetBox">
-		    <div class="textwidget">
-		        <p>
-		            <a href="/about"><img src="/img/logos.jpg" width="165" height="127" /></a>
-		        </p>
-        </div>
+		</div><div id="text-4" class="widget_text sidebarBox widgetBox"><h3>Stay in touch</h3>			<div class="textwidget"><p><a href="mailto:info@prescribinganalytics.com" target="_blank" class="button ">Sign up</a></p>
+</div>
+		</div><div id="text-3" class="widget_text sidebarBox widgetBox">			<div class="textwidget"><p><a href="http://test.prescribinganalytics.com/?page_id=93"><img src="/img/logos.jpg" width="165" height="127" /></a></p>
+</div>
 		</div></div><!-- end sidebar -->
 		</div>
 	</div>
@@ -86,13 +70,15 @@ body.custom-background { background-image: url('/img/bg.jpg'); background-repeat
 
 	<div id="content">
 		<div class="post-82 page type-page status-publish hentry clearfix box">
+
             <%= yield %>
 
-        </div>
-    </div>
+		</div>
+	</div>
+
 	<div id="footer">
 
-		<div class="inside"><p>Contact us about analytics services <a href="/contact">link</a>
+		<div class="inside"><p><a href="mailto:info@prescribinganalytics.com">Contact us</a> about analytics services
 
 </p></div>
 	</div><!-- end footer -->

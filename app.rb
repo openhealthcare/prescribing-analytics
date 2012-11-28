@@ -44,8 +44,12 @@ get '/primer' do
   erb :primer
 end
 
-get '/wasteful' do
-  erb :wasteful
+get '/faq' do
+  erb :faq
+end
+
+get '/methodology' do
+  erb :methodology
 end
 
 get '/future' do

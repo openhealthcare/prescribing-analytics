@@ -1963,3 +1963,93 @@ ol#commentslist {
 		font-size: .8em;
 	}
 }
+
+/*additions */
+
+#content h5 { color:#0a476a;
+	font-size:0.9em;
+	line-height:normal;
+	}
+
+#content h3 { color:#3a8585;
+	font-family:"Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight:bold;
+	}
+
+	#content h4 {
+	font-family:"Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height:normal;
+	font-weight:bold;
+	font-size:1em;
+	}
+
+#content a {
+	color:#f1532f;
+	font-weight:bold
+	}
+
+#content a:hover {
+	color: #78bc99;
+	font-weight:bold
+}
+
+#pageHead {
+	/*can put a background image in here, floated to the right perhaps*/
+	background-image:url(/img/pagehead-bg.png);
+	background-position:right;
+}
+
+#pageHead h1{
+	color:#3a8585;
+	}
+
+
+#sidebar a{
+	font-weight:bold;
+	}
+
+#sidebar p{
+	color:696969;
+}
+
+#footer {background-image:url(/img/analyticslink.png);
+background-position:right;
+background-repeat:no-repeat;
+}
+
+
+#footer a{
+	color: #3a8585;
+	font-weight:bold
+}
+
+#footer a:hover {
+	color: #f1532f;
+	font-weight:bold
+}
+
+
+#mainNav ul li.current a{
+	color:baa880;
+	}
+
+#content h2.headline{
+	font-family:"Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height:normal;
+	}
+
+
+
+#content p{
+	color:#5e5e5e;
+	}
+
+.credit{
+	font-size:.8em;
+	colour:#808080;
+	}
+
+
+#content ul.statinlist {
+color:#0a476a;
+}

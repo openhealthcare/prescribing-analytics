@@ -52,10 +52,6 @@ get '/methodology' do
   erb :methodology
 end
 
-get '/future' do
-  erb :future
-end
-
 get '/about' do
   erb :about
 end
@@ -71,6 +67,10 @@ end
 post '/contact' do
   @submitted = true
   @error = nil
+
+  # Get post data and try and send a mail, if we fail we
+  # should warn the user.  Make sure email address is validated
+  # as an email address.
 
   mail = Mail.deliver do
       to "ross@servercode.co.uk"

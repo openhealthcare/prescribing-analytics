@@ -2012,7 +2012,7 @@ ol#commentslist {
 	color:696969;
 }
 
-#footer {background-image:url(/img/analyticslink.png);
+#footer {
 background-position:right;
 background-repeat:no-repeat;
 }
@@ -2051,5 +2051,9 @@ background-repeat:no-repeat;
 
 
 #content ul.statinlist {
-color:#0a476a;
+    color:#0a476a;
+}
+
+#content ul.statinlist li {
+    margin: 0;
 }

@@ -64,6 +64,10 @@ get '/contact' do
   erb :contact
 end
 
+get '/google1d295fe6d703418a.html' do
+  erb :google1d295fe6d703418a, :layout => false
+end
+
 post '/contact' do
   @submitted = true
   @error = nil

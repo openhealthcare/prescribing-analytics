@@ -36,9 +36,6 @@ else
   end
 end
 
-before do
-  content_type :html, 'charset' => 'utf-8'
-end
 
 get '/pct-data.js' do
   headers['Content-Encoding'] = 'gzip'

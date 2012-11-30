@@ -1,3 +1,30 @@
+<link href="/css/nv.d3.css" rel="stylesheet" type="text/css">
+<script src="/js/d3.v2.min.js"></script>
+<script src="/js/nv.d3.js"></script>
+<script src="/js/tooltip.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/legend.js"></script>
+<script src="/js/axis.js"></script>
+<script src="/js/scatter.js"></script>
+<script src="/js/line.js"></script>
+ <script src="/js/lineChart.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<style>
+text {
+  font: 12px sans-serif;
+}
+
+svg {
+  display: block;
+}
+
+#chart1 svg {
+  height: 500px;
+  min-width: 100px;
+  min-height: 100px;
+}
+</style>
+
 <div id="pageHead">
 				<h1>Detailed Statin Analysis</h1>
 
@@ -16,14 +43,81 @@
 <li dir="ltr">Simvastatin &amp; Ezetimibe (generic only)</li>
 </ul>
 <p>Prior to June 2012, when Atorvastatin came off patent, Atorvastatin and Rosuvastatin both cost at least 11 times more than Simvastatin 40mg, and sometimes more, depending on dosage. The spend per month on these drugs is as follows.</p>
-<p>[CHART HERE]</p>
+
+
+<p>
+    <div id="chart1">
+        <svg></svg>
+    </div>
+</p>
+
+
 <p>In June 2012, Atorvastatin became available in generic form and the price dropped dramatically, as shown on the chart. Since that time, generic Atorvastatin might be a reasonable and cost-effective choice, so we have excluded dates after that time from this analysis.</p>
 <p>In that time period (September 2011 to May 2012), the NHS could have saved a median  &pound;3.85 million per month if all GP prescribers exchanged Rosuvastatin Calcium for 40mg Simvastatin, and a median &pound;22.96 million per month if they exchanged Atorvastatin for 40mg Simvastatin.</p>
 <p>We have conservatively assumed that all other drugs are prescribed in their generic forms, since we don’t have the exact data on which of branded or generic was prescribed. The likelihood is that the true potential savings would be higher, with more accurate data.</p>
 <p>To reproduce or check these figures, please read the <a title="Methodology" href="/methodology">Methodology</a>.</p>
+</div>
+
+<script>
+
+
+nv.addGraph(function() {
+
+  var chart = nv.models.multiBarChart()
+              .margin({bottom: 80, left: 100})
+              .forceY([0,37000000]);
+
+  chart.tooltip(
+    function(key, x, y, e, graph) {
+        return '<h3>' + key + '</h3>' +
+               '<p>' +  y + ' on '
+    + $.datepicker.formatDate( 'MM yy', new Date(x) )
+    + '</p>'}
+  );
+
+  chart.xAxis
+      .axisLabel('Date')
+      // .rotateLabels(-45)
+      .scale(d3.scale.linear().domain([1314835200000,1335830400000]).nice())
+      .tickFormat(function(d) { return d3.time.format('%b %Y') (new Date(d)) });
+
+  chart.yAxis
+      .axisLabel('Spend (£s)')
+      .scale(d3.scale.linear().domain([0,27000000]))
+      .tickFormat(d3.format('.4s'));
+
+  d3.select('#chart1 svg')
+      .datum(data())
+      .transition().duration(500)
+      .call(chart);
+
+  nv.utils.windowResize(chart.update);
+
+  return chart;
+});
 
 
 
+function data() {
+
+  return [
+    {
+      values: [ { "x": 1314835200000, "y": 24915919.45 }, { "x": 1317427200000, "y": 23298009 }, { "x": 1320105600000, "y": 24294736.08 }, { "x": 1322697600000, "y": 25552593.27 }, { "x": 1.325376e+12, "y": 23528884.91 }, { "x": 1328054400000, "y": 23351444.23 }, { "x": 1.33056e+12, "y": 25441312.37 }, { "x": 1333238400000, "y": 23594858.45 }, { "x": 1335830400000, "y": 26635430.09 } ],
+      key: 'Atorvastatin',
+      color: '#F03B20'
+    }
+    ,{
+      values: [ { "x": 1314835200000, "y": 4255964.68 }, { "x": 1317427200000, "y": 3960600.68 }, { "x": 1320105600000, "y": 4083574.25 }, { "x": 1322697600000, "y": 4280870.77 }, { "x": 1.325376e+12, "y": 3922911.87 }, { "x": 1328054400000, "y": 3849804 }, { "x": 1.33056e+12, "y": 4150547.38 }, { "x": 1333238400000, "y": 3813165.56 }, { "x": 1335830400000, "y": 4187748.57 } ],
+      key: 'Rosuvastatin Calcium',
+      color: '#BD0026'
+    }
+    ,{
+      values: [ { "x": 1314835200000, "y": 5183667.54 }, { "x": 1317427200000, "y": 4412844.29 }, { "x": 1320105600000, "y": 4596837.38 }, { "x": 1322697600000, "y": 4813831.72 }, { "x": 1.325376e+12, "y": 4908640.83 }, { "x": 1328054400000, "y": 4866238.6 }, { "x": 1.33056e+12, "y": 5269084.93 }, { "x": 1333238400000, "y": 4661860.71 }, { "x": 1335830400000, "y": 5182770.32 } ],
+      key: 'Simvastatin',
+      color: '#0571B0'
+    }
+  ];
+}
 
 
-						</div>
+</script>

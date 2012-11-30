@@ -48,11 +48,10 @@ a:hover {color: #f1532f;}
 .button:hover, #searchsubmit:hover, input[type="submit"]:hover {background-color: #78bc99 !important;}
 
 
-
 #map {
-	width: 640px;
-	height: 480px;
-}
+			width: 640px;
+			height: 480px;
+		}
 
 		.info {
 			padding: 6px 8px;

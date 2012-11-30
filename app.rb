@@ -13,7 +13,7 @@ use Rack::Auth::Basic do |username, password|
 end
 
 if ENV['SENDGRID_USERNAME']
-  #set :static_cache_control, [:public, {:max_age => 300}]
+  set :static_cache_control, [:public, {:max_age => 300}]
   Mail.defaults do
     delivery_method :smtp, {
       :address => 'smtp.sendgrid.net',

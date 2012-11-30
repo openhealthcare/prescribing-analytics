@@ -39,6 +39,7 @@ end
 
 get '/pct-data.js' do
   headers['Content-Encoding'] = 'gzip'
+  headers['Content-Type'] = 'application/javascript'
   StringIO.new.tap do |io|
     gz = Zlib::GzipWriter.new(io)
     begin

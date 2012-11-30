@@ -13,6 +13,7 @@ use Rack::Auth::Basic do |username, password|
 end
 
 if ENV['SENDGRID_USERNAME']
+  #set :static_cache_control, [:public, {:max_age => 300}]
   Mail.defaults do
     delivery_method :smtp, {
       :address => 'smtp.sendgrid.net',
@@ -37,6 +38,18 @@ end
 
 before do
   content_type :html, 'charset' => 'utf-8'
+end
+
+get '/pct-data.js' do
+  headers['Content-Encoding'] = 'gzip'
+  StringIO.new.tap do |io|
+    gz = Zlib::GzipWriter.new(io)
+    begin
+      gz.write(File.read('public/js/pct-data.js'))
+    ensure
+      gz.close
+    end
+  end.string
 end
 
 get '/' do

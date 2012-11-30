@@ -2,7 +2,9 @@
 # encoding: utf-8
 
 require 'sinatra'
-require 'mail'
+require 'pony'
+require 'json'
+require 'erb'
 
 use Rack::Auth::Basic do |username, password|
   if ENV['AUTH_USER']
@@ -14,26 +16,27 @@ end
 
 if ENV['SENDGRID_USERNAME']
   set :static_cache_control, [:public, {:max_age => 300}]
-  Mail.defaults do
-    delivery_method :smtp, {
-      :address => 'smtp.sendgrid.net',
-      :port => 587,
-      :domain => 'heroku.com',
-      :user_name => ENV['SENDGRID_USERNAME'],
-      :password => ENV['SENDGRID_PASSWORD'],
-      :authentication => 'plain',
-      :enable_starttls_auto => true
-    }
-  end
+  Pony.options = {
+      :via => :smtp,
+      :via_options => {
+          :host => 'smtp.sendgrid.net',
+          :port =>587,
+          :user_name => ENV['SENDGRID_USERNAME'],
+          :password => ENV['SENDGRID_PASSWORD'],
+          :authentication => :plain,
+          :domain => 'heroku.com',
+        }
+  }
 else
-  Mail.defaults do
-    delivery_method :smtp, {
-      :address => 'localhost',
-      :port => 1025,
-      :domain => 'localhost',
-      :authentication => 'plain',
-    }
-  end
+  Pony.options = {
+      :via => :smtp,
+      :via_options => {
+          :host => 'localhost',
+          :port => 1025,
+          :authentication => :plain,
+          :domain => 'heroku.com',
+        }
+  }
 end
 
 
@@ -84,20 +87,42 @@ get '/google1d295fe6d703418a.html' do
 end
 
 post '/contact' do
-  @submitted = true
+  @errors = []
   @error = nil
 
   # Get post data and try and send a mail, if we fail we
   # should warn the user.  Make sure email address is validated
   # as an email address.
+  if params[:name] == ""
+    @errors << "Please specify your name."
+  end
 
-  mail = Mail.deliver do
-      to "ross@servercode.co.uk"
-      from "ross@servercode.co.uk"
-      subject 'Prescribing Analytics contact'
-      text_part do
-          body ""
-      end
+  if params[:email] == ""
+    @errors << "Please specify your email"
+  else
+    if (params[:email] =~ /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i).nil?
+      @errors << "That email address doesn't seem valid, please try again"
+    end
+  end
+
+  if not params[:iam] or params[:iam] == ""
+    @errors << "Please specify your role"
+  end
+
+  @name = params[:name]
+  @email = params[:email]
+  @iam = params[:iam]
+
+  if @errors.length == 0
+
+    Pony.mail :to => "info@prescribinganalytics.com",
+            :from => "info@prescribinganalytics.com",
+            :subject => "Prescribing Analytics Contact Form",
+            :body => erb(:email, :layout=>false)
+    @submitted = true
+  else
+    @submitted = false
+    @error = @errors.join("<br/>")
   end
 
   erb :contact

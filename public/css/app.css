@@ -47,6 +47,17 @@ a:hover {color: #f1532f;}
 .button, #searchsubmit, input[type="submit"] {background-color: #f1532f !important;}
 .button:hover, #searchsubmit:hover, input[type="submit"]:hover {background-color: #78bc99 !important;}
 
+.thanks {
+    background-color: #a7daa7;
+    padding: 6px;
+    font-weight: bold;
+}
+
+.err {
+    background-color: #f1532f;
+    padding: 6px;
+    font-weight: bold;
+}
 
 #map {
 			width: 640px;

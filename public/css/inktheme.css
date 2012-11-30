@@ -391,7 +391,7 @@ pre {
 	color: #b0b0ad !important;
 }
 
-input[type="text"], textarea {
+input[type="text"], textarea, input[type="email"] {
 	background-color: #fafafa;
 	padding: 10px;
 	font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -401,9 +401,10 @@ input[type="text"], textarea {
 	color: #6a6a6a;
 	border: 1px solid #ddd;
 	background:	#fafafa url(images/field_bkg.png) repeat-x;
+	font-size: 1.1em;
 }
 
-input[type="text"]:focus {outline: none; background-color: #f7f7f7;}
+input[type="text"]:focus,input[type="email"]:focus {outline: none; background-color: #f7f7f7;}
 textarea:focus {outline: none; background-color: #f7f7f7;}
 
 textarea { width: 80%; font-size: 13px;}
@@ -707,7 +708,7 @@ a.button, #footer a.button, #searchsubmit, input[type="submit"]  {
 	position: relative;
 	cursor: pointer;
 	font-weight: bold;
-	padding: 15px 25px 15px;
+    padding: 5px 5px;
 	border: 1px solid rgba(0,0,0,.1);
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;

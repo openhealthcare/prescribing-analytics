@@ -114,12 +114,16 @@ post '/contact' do
   @iam = params[:iam]
 
   if @errors.length == 0
-
-    Pony.mail :to => "info@prescribinganalytics.com",
-            :from => "info@prescribinganalytics.com",
-            :subject => "Prescribing Analytics Contact Form",
-            :body => erb(:email, :layout=>false)
-    @submitted = true
+    begin
+      Pony.mail :to => "info@prescribinganalytics.com",
+              :from => "info@prescribinganalytics.com",
+              :subject => "Prescribing Analytics Contact Form",
+              :body => erb(:email, :layout=>false)
+      @submitted = true
+    rescue
+      @submitted = false
+      @error = "There was an error delivering your email, please email info@prescribinganalytics.com directly"
+    end
   else
     @submitted = false
     @error = @errors.join("<br/>")

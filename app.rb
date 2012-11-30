@@ -4,6 +4,14 @@
 require 'sinatra'
 require 'mail'
 
+use Rack::Auth::Basic do |username, password|
+  if ENV['AUTH_USER']
+    username == ENV['AUTH_USER'] && password == ENV['AUTH_PASSWORD']
+  else
+    username == 'ohc' && password == 'ohc'
+  end
+end
+
 if ENV['SENDGRID_USERNAME']
   Mail.defaults do
     delivery_method :smtp, {

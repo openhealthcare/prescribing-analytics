@@ -43,6 +43,7 @@ end
 get '/pct-data.js' do
   headers['Content-Encoding'] = 'gzip'
   headers['Content-Type'] = 'application/javascript'
+  headers['Cache-Control'] =  "max-age=290304000, public"
   StringIO.new.tap do |io|
     gz = Zlib::GzipWriter.new(io)
     begin

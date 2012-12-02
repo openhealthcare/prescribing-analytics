@@ -40,20 +40,6 @@ else
 end
 
 
-get '/pct-data.js' do
-  headers['Content-Encoding'] = 'gzip'
-  headers['Content-Type'] = 'application/javascript'
-  headers['Cache-Control'] =  "max-age=290304000, public"
-  StringIO.new.tap do |io|
-    gz = Zlib::GzipWriter.new(io)
-    begin
-      gz.write(File.read('public/js/pct-data.js'))
-    ensure
-      gz.close
-    end
-  end.string
-end
-
 get '/' do
   erb :index
 end

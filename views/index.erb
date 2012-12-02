@@ -28,9 +28,9 @@
 
     <script type="text/javascript" src="/js/leaflet.js"></script>
 <!--	<script type="text/javascript" src="/pct-data.js"></script> -->
-	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-data.js"></script>
 
 <script type="text/javascript">
+
 
 		var map = L.map('map').setView([53.0, -1.5], 6);
 
@@ -53,7 +53,7 @@
 		info.update = function (props) {
 			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>' +  (props ?
 				'<b>' + props.PCO11NM + '</b><br />' + props.percentage.toFixed(2) + '% statins proprietary'
-                                + '<br />' + props.total + ' total statins  prescribed'
+                                + '<br />' + props.total + ' statin items per month prescribed'
 
 				: 'Hover over a Primary Care Trust');
 		};
@@ -131,10 +131,7 @@
 			});
 		}
 
-		geojson = L.geoJson(pctData, {
-			style: style,
-			onEachFeature: onEachFeature
-		}).addTo(map);
+
 
 		map.attributionControl.addAttribution('Prescription data from <a href="http://www.ic.nhs.uk/services/transparency/prescribing-by-gp-practice--chemical-level-data">NHS Information Centre</a>');
 
@@ -162,9 +159,67 @@
 		};
 
 		legend.addTo(map);
-
 	</script>
 
+       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-0.js"></script>
+<script type="text/javascript">
+	  geojson = L.geoJson(pctData0, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+
+</script>
+
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-1.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData1, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-2.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData2, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-3.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData3, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-4.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData4, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-5.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData5, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-6.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData6, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-7.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData7, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
 <p>The map shows the percentage of statin prescription items in two classes of branded statins, at PCT level. NICE guidelines say that the generic Simvastatin should be a default option for patients. Wherever the percentage of branded items is high, it represents potential to make big savings by switching. Those savings could be used to help more patients.</p>
 <p><a name="note1"></a> 1.<a href="http://en.wikipedia.org/wiki/Nicholson_challenge" target="_blank">en.wikipedia.org/wiki/Nicholson_challenge</a><br />
 <a name="note2"></a>2.The National Institute of Clinical Excellence (NICE) issues guidance to UK healthcare professionals that takes account of the value for money, or cost effectiveness, of available treatments.<br />

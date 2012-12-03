@@ -6,11 +6,13 @@ require 'pony'
 require 'json'
 require 'erb'
 
-use Rack::Auth::Basic do |username, password|
-  if ENV['AUTH_USER']
-    username == ENV['AUTH_USER'] && password == ENV['AUTH_PASSWORD']
-  else
-    username == 'ohc' && password == 'ohc'
+unless %w[bosch rasputin].member? Socket.gethostname
+  use Rack::Auth::Basic do |username, password|
+    if ENV['AUTH_USER']
+      username == ENV['AUTH_USER'] && password == ENV['AUTH_PASSWORD']
+    else
+      username == 'ohc' && password == 'ohc'
+    end
   end
 end
 

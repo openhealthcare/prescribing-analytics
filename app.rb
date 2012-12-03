@@ -46,6 +46,14 @@ get '/' do
   erb :index
 end
 
+get '/ccg' do
+  erb :index
+end
+
+get '/pct' do
+  erb :pct
+end
+
 
 get '/analysis' do
   erb :analysis

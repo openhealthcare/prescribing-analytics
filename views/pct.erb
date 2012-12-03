@@ -9,13 +9,14 @@
 <p>To meet the Nicholson challenge the NHS needs to make £20 billion in “efficiency savings” by 2015<a href="#note1"> (1)</a>.</p>
 <p>Billions of pounds a year are spent by the NHS on essential drugs. Often, there’s a choice between an expensive branded drug, and a generic equivalent which can cost over 90% less.</p>
 
+
     <center>
 	<div id="map">
 	   <img src="/img/spinner.gif" style='margin-top:20px;'>
 	</div>
     </center>
     <p>
-        <a name="data" href="/pct#map">Show PCT data</a>
+        <a name="data" href="/ccg#map">Show CCG data</a>
     </p>
 
 <br/>
@@ -27,9 +28,12 @@
 <p>This map shows an example: variation in GPs&apos; prescriptions of statins, which are used to lower cholesterol. Annually, this represents over &pound;200 million pounds worth of missed potential savings.</p>
 
 
-    <script type="text/javascript" src="/js/leaflet.js"></script>
 
-	<script type="text/javascript">
+    <script type="text/javascript" src="/js/leaflet.js"></script>
+<!--	<script type="text/javascript" src="/pct-data.js"></script> -->
+
+<script type="text/javascript">
+
 
 		var map = L.map('map').setView([53.0, -1.5], 6);
 
@@ -50,14 +54,11 @@
 		};
 
 		info.update = function (props) {
-			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>'
-		+  (props ? '<b>Region: ' + props.region + '</b><br />'
-		            + '<b>CCG: ' + props.ccg_name + '</b><br />'
-		            + props.ccg_problem.toFixed(2) + '% statins proprietary'
-                            + '<br />' + props.total_items_month + ' statin items per month prescribed'
-                            + '<br />' + props.population + ' population'
-                            + '<br />' + props.no_of_practices + ' GP Practices'
-                          : 'Hover over a Clinical CommissioningGroup');
+			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>' +  (props ?
+				'<b>' + props.PCO11NM + '</b><br />' + props.percentage.toFixed(2) + '% statins proprietary'
+                                + '<br />' + props.total + ' statin items per month prescribed'
+
+				: 'Hover over a Primary Care Trust');
 		};
 
 		info.addTo(map);
@@ -75,6 +76,16 @@
 			                 '#FFF7EC';
 		}
 
+//	        function getColor(d) {
+//	                return d > 27  ? '#7A0177' :
+//			       d > 25  ? '#AE017E' :
+//			       d > 24  ? '#DD3497' :
+//			       d > 23  ? '#F768A1' :
+//			       d > 22  ? '#FA9FB5' :
+//			       d > 21  ? '#FCC5C0' :
+//			       d > 19  ? '#FDE0DD' :
+//			                 '#FFF7F3';
+//		}
 
 		function style(feature) {
 			return {
@@ -83,7 +94,7 @@
 				color: 'white',
 				dashArray: '3',
 				fillOpacity: 0.7,
-				fillColor: getColor(feature.properties.ccg_problem)
+				fillColor: getColor(feature.properties.percentage)
 			};
 		}
 
@@ -151,41 +162,67 @@
 		};
 
 		legend.addTo(map);
-
 	</script>
 
-  	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-0.js"></script>
+       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-0.js"></script>
+<script type="text/javascript">
+	  geojson = L.geoJson(pctData0, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+
+</script>
+
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-1.js"></script>
         <script type="text/javascript">
-	  geojson = L.geoJson(ccgData0, {
+	  geojson = L.geoJson(pctData1, {
 	                      style: style,
 			      onEachFeature: onEachFeature
                              }).addTo(map);
 	</script>
 
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-1.js"></script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-2.js"></script>
         <script type="text/javascript">
-	  geojson = L.geoJson(ccgData1, {
+	  geojson = L.geoJson(pctData2, {
 	                      style: style,
 			      onEachFeature: onEachFeature
                              }).addTo(map);
 	</script>
-
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-2.js"></script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-3.js"></script>
         <script type="text/javascript">
-	  geojson = L.geoJson(ccgData2, {
+	  geojson = L.geoJson(pctData3, {
 	                      style: style,
 			      onEachFeature: onEachFeature
                              }).addTo(map);
 	</script>
-
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-3.js"></script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-4.js"></script>
         <script type="text/javascript">
-	  geojson = L.geoJson(ccgData3, {
+	  geojson = L.geoJson(pctData4, {
 	                      style: style,
 			      onEachFeature: onEachFeature
                              }).addTo(map);
 	</script>
-
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-5.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData5, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-6.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData6, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/pct-drug-data-7.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(pctData7, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
 <p>The map shows the percentage of statin prescription items in two classes of branded statins, at PCT level. NICE guidelines say that the generic Simvastatin should be a default option for patients. Wherever the percentage of branded items is high, it represents potential to make big savings by switching. Those savings could be used to help more patients.</p>
 <p><a name="note1"></a> 1.<a href="http://en.wikipedia.org/wiki/Nicholson_challenge" target="_blank">en.wikipedia.org/wiki/Nicholson_challenge</a><br />
 <a name="note2"></a>2.The National Institute of Clinical Excellence (NICE) issues guidance to UK healthcare professionals that takes account of the value for money, or cost effectiveness, of available treatments.<br />

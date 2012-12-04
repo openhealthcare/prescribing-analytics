@@ -1,0 +1,203 @@
+<div id="pageHead">
+	<h1>Home</h1>
+</div>
+
+
+<div class="inside">
+
+					<h2 class="headline"><strong>NHS efficiency savings: the role of prescribing analytics</strong><br />
+</h2>
+<p>To meet the Nicholson challenge the NHS needs to make £20 billion in “efficiency savings” by 2015<a href="#note1"> (1)</a>.</p>
+<p>Billions of pounds a year are spent by the NHS on essential drugs. Often, there’s a choice between an expensive branded drug, and a generic equivalent which can cost over 90% less.</p>
+
+    <center>
+	<div id="map">
+	   <img src="/img/spinner.gif" style='margin-top:20px;'>
+	</div>
+    </center>
+    <p>
+        <a name="data" href="/pct#map">Show PCT data</a>
+    </p>
+
+<br/>
+<p>Where generic alternatives exist, NHS purchasing of branded drugs has a number of effects:</p>
+<p style="padding-left: 30px;">1. With a finite amount of money to spend on treatments, giving a patient an expensive drug where cheaper equivalents with the same effect exist means that other patients may not receive the care that they need.</p>
+<p style="padding-left: 30px;">2. Newer, more expensive drugs may expose patients to unnecessary risk since they have generally been tried and tested by fewer people.</p>
+<p style="padding-left: 30px;">3. An environment where millions of pounds are invested on branded drugs that produce, at best, a small incremental change,is not likely to be conducive to encouraging genuine innovation.</p>
+<p>We aim to help the NHS to find opportunities at this time of great change and financial pressure, by clearly identifying and mapping prescribing variation against NICE guidance <a  href="#note2">(2)</a>, using open data. Prescribing variation is a complex picture, but big differences usually suggest an opportunity to save.</p>
+<p>This map shows an example: variation in GPs&apos; prescriptions of statins, which are used to lower cholesterol. Annually, this represents over &pound;200 million pounds worth of missed potential savings.</p>
+
+
+    <script type="text/javascript" src="/js/leaflet.js"></script>
+	<link rel="stylesheet" href="/css/MarkerCluster.css" />
+	<link rel="stylesheet" href="/css/MarkerCluster.Default.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="/css/MarkerCluster.Default.ie.css" /><![endif]-->
+	<script src="/js/leaflet.markercluster-src.js"></script>
+
+	<script type="text/javascript">
+
+		var map = L.map('map').setView([53.0, -1.5], 6);
+
+		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+			key: 'BC9A493B41014CAABB98F0471D759707',
+			styleId: 22677
+		}).addTo(map);
+
+
+		// control that shows state info on hover
+		var info = L.control();
+
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info');
+			this.update();
+			return this._div;
+		};
+
+		info.update = function (props) {
+			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>'
+		+  (props ? '<b>Region: ' + props.region + '</b><br />'
+		            + '<b>CCG: ' + props.ccg_name + '</b><br />'
+		            + props.ccg_problem.toFixed(2) + '% statins proprietary'
+                            + '<br />' + props.total_items_month + ' statin items per month prescribed'
+                            + '<br />' + props.population + ' population'
+                            + '<br />' + props.no_of_practices + ' GP Practices'
+                          : 'Hover over a Clinical Commissioning Group');
+		};
+
+		info.addTo(map);
+
+
+		// get color depending on population density value
+		function getColor(d) {
+			return d > 27  ? '#990000' :
+			       d > 25  ? '#D7301F' :
+			       d > 24  ? '#EF6548' :
+	                       d > 23  ? '#FC8D59' :
+			       d > 22  ? '#FDBB84' :
+			       d > 21  ? '#FDD49E' :
+			       d > 19  ? '#FEE8C8' :
+			                 '#FFF7EC';
+		}
+
+
+		function style(feature) {
+			return {
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties.ccg_problem)
+			};
+		}
+
+		function highlightFeature(e) {
+			var layer = e.target;
+
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer.bringToFront();
+			}
+
+			info.update(layer.feature.properties);
+		}
+
+		var geojson;
+
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update();
+		}
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+
+
+
+		map.attributionControl.addAttribution('Prescription data from <a href="http://www.ic.nhs.uk/services/transparency/prescribing-by-gp-practice--chemical-level-data">NHS Information Centre</a>');
+
+
+		var legend = L.control({position: 'bottomright'});
+
+		legend.onAdd = function (map) {
+
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 19, 21, 22, 23, 24, 25, 27, 35], // [0, 10, 20, 50, 100, 200, 500, 1000],
+				labels = [],
+				from, to;
+
+			for (var i = 0; i < grades.length; i++) {
+				from = grades[i];
+				to = grades[i + 1];
+
+				labels.push(
+					'<i style="background:' + getColor(from + 1) + '"></i> ' +
+					from + (to ? '&ndash;' + to : '+'));
+			}
+
+			div.innerHTML = labels.join('<br>');
+			return div;
+		};
+
+		legend.addTo(map);
+
+	</script>
+
+  	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-0.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(ccgData0, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+
+       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-1.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(ccgData1, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+
+       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-2.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(ccgData2, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+
+       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-3.js"></script>
+        <script type="text/javascript">
+	  geojson = L.geoJson(ccgData3, {
+	                      style: style,
+			      onEachFeature: onEachFeature
+                             }).addTo(map);
+	</script>
+
+        <script type="text/javascript" src="/js/practice.js"></script>
+
+<p>The map shows the percentage of statin prescription items in two classes of branded statins, at CCG level. NICE guidelines say that the generic Simvastatin should be a default option for patients. Wherever the percentage of branded items is high, it represents potential to make big savings by switching. Those savings could be used to help more patients.</p>
+<p><a name="note1"></a> 1.<a href="http://en.wikipedia.org/wiki/Nicholson_challenge" target="_blank">en.wikipedia.org/wiki/Nicholson_challenge</a><br />
+<a name="note2"></a>2.The National Institute of Clinical Excellence (NICE) issues guidance to UK healthcare professionals that takes account of the value for money, or cost effectiveness, of available treatments.<br />
+<a href="http://www.nice.org.uk/nicemedia/live/11982/40675/40675.pdf" target="_blank">www.nice.org.uk/nicemedia/live/11982/40675/40675.pdf</a> (NICE lipid modification guidelines)</p>
+<h4>Other drugs</h4>
+<p>Statins are just the start of this story. Our preliminary analysis of several other drug classes suggests statins are just the tip of the iceberg in UK prescribing variation and potential savings.</p>
+<p>We are developing tools to help all interested parties to make the most of the NHS &#8211; please <a href="/contact">sign up</a> to learn more.</p>
+</div>

@@ -22,11 +22,14 @@
         <input type='email' name='email' size="40" value="<%= @email %>"/><br/>
     </p>
     <p>
+        <label for="comment">Message</label><br/>
+        <textarea name="comment" rows="8" maxlength="1000"><%= @comment %></textarea>
+    </p>
+    <p>
         <label for="iam">I am </label><br/>
         &nbsp;&nbsp;<input type='radio' name="iam" value="NHS Employee" <% if @iam == 'NHS Employee'%>checked<% end%>/> an NHS Employee<br/>
         &nbsp;&nbsp;<input type='radio' name="iam" value="Interested member of the public" <% if @iam == 'Interested member of the public'%>checked<% end%>/> an interested member of the public<br/>
         &nbsp;&nbsp;<input type='radio' name="iam" value="Other" <% if @iam == 'Other'%>checked<% end%>/> Other<br/>
-
         <input type="submit" value='Send' style='float:right;'/>
     </p>
 </form>

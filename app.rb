@@ -6,7 +6,7 @@ require 'pony'
 require 'json'
 require 'erb'
 
-unless %w[bosch rasputin].member? Socket.gethostname
+unless %w[bosch rasputin].member? Socket.gethostname or ENV['SKIP_AUTH']
   use Rack::Auth::Basic do |username, password|
     if ENV['AUTH_USER']
       username == ENV['AUTH_USER'] && password == ENV['AUTH_PASSWORD']
@@ -112,6 +112,7 @@ post '/contact' do
   @name = params[:name]
   @email = params[:email]
   @iam = params[:iam]
+  @comment = params[:comment]
 
   if @errors.length == 0
     begin

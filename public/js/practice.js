@@ -1,8 +1,8 @@
 
-//var markers = new L.MarkerClusterGroup();
+var markers = new L.MarkerClusterGroup({disableClusterAtZoom: 14});
 
 //var markers = [];
-var markers = new L.LayerGroup()
+// var markers = new L.LayerGroup()
 
 
   var marker1 = L.marker([54.561219329,-1.31880684345]);

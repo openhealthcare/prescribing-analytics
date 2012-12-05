@@ -54,9 +54,9 @@ get '/pct' do
   erb :pct
 end
 
-get '/practice' do
-  erb :practice
-end
+# get '/practice' do
+#   erb :practice
+# end
 
 get '/analysis' do
   erb :analysis

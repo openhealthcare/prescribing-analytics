@@ -1,9 +1,11 @@
 Hi,
 
 My name is <%= @name %> and I a identify as <%= @iam %>.
-My email address is <%= @email %> and it would be great
-if you could send me a message.
+My email address is <%= @email %> <% if @comment and @comment != '' %>and it would be great
+if you could send me a message.<% end %>
 
-Thanks.
+<% if @comment and @comment != ''%>
+They left a message:
+<%= @comment %>
+<% end %>
 
-<%= @name %>

@@ -1996,7 +1996,7 @@ ol#commentslist {
 
 #pageHead {
 	/*can put a background image in here, floated to the right perhaps*/
-	background-image:url(/img/pagehead-bg.png);
+	background-image:url(https://s3-eu-west-1.amazonaws.com/prescribinganalytics/img/pagehead-bg.png);
 	background-position:right;
 }
 

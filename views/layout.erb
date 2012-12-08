@@ -5,16 +5,16 @@
         <title>Prescribing Analytics</title>
         <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" />
-        <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/inktheme.css" type="text/css" media="screen" />
-        <link rel="shortcut icon" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/img/favicon.png" />
-        <link rel="stylesheet" id="app-css" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/app.css" type="text/css" media="all" />
-        <link rel="stylesheet" id="superfish-css" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/superfish.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/leaflet.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="/css/inktheme.css" type="text/css" media="screen" />
+        <link rel="shortcut icon" href="<%= settings.media_url %>/img/favicon.png" />
+        <link rel="stylesheet" id="superfish-css" href="<%= settings.media_url %>/css/superfish.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="<%= settings.media_url %>/css/leaflet.css" type="text/css" media="all" />
+        <link rel="stylesheet" id="app-css" href="<%= settings.media_url %>/css/app.css" type="text/css" media="all" />
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <link rel="next" title="About this site" href="/about" />
         <link rel="canonical" href="http://prescribinganalytics.com/" />
-        <!--[if IE 7]><link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/ie7.css" type="text/css" media="screen" /><![endif]-->
-        <!--[if IE 8]><link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/css/ie8.css" type="text/css" media="screen" /><![endif]-->
+        <!--[if IE 7]><link rel="stylesheet" href="<%= settings.media_url %>/css/ie7.css" type="text/css" media="screen" /><![endif]-->
+        <!--[if IE 8]><link rel="stylesheet" href="<%= settings.media_url %>/css/ie8.css" type="text/css" media="screen" /><![endif]-->
     </head>
     <body class="home page page-id-82 page-template-default custom-background">
         <div id="container">
@@ -22,7 +22,7 @@
                 <div class="inside clearfix">
                     
                     <div id="logo">
-                        <h1 class="logo"><a href="/"><img src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/img/sitelogo.png" alt="Prescribing Analytics" /></a></h1>
+                        <h1 class="logo"><a href="/"><img src="<%= settings.media_url %>/img/sitelogo.png" alt="Prescribing Analytics" /></a></h1>
                     </div>
                     
                     <div id="mainNav" class="clearfix">

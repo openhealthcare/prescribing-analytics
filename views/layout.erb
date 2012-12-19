@@ -9,6 +9,7 @@
         <link rel="shortcut icon" href="<%= settings.media_url %>/img/favicon.png" />
         <link rel="stylesheet" id="superfish-css" href="<%= settings.media_url %>/css/superfish.css" type="text/css" media="all" />
         <link rel="stylesheet" href="<%= settings.media_url %>/css/leaflet.css" type="text/css" media="all" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="<%= settings.media_url %>/css/leaflet.ie.css" /><![endif]-->
         <link rel="stylesheet" id="app-css" href="<%= settings.media_url %>/css/app.css" type="text/css" media="all" />
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <link rel="next" title="About this site" href="/about" />
@@ -20,11 +21,11 @@
         <div id="container">
             <div id="header">
                 <div class="inside clearfix">
-                    
+
                     <div id="logo">
                         <h1 class="logo"><a href="/"><img src="<%= settings.media_url %>/img/sitelogo.png" alt="Prescribing Analytics" /></a></h1>
                     </div>
-                    
+
                     <div id="mainNav" class="clearfix">
                         <div class="menu-menumain-container">
                             <ul id="menu-menumain" class="sf-menu">
@@ -38,7 +39,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div id="sidebar" class="clearfix">
                         <div id="text-2" class="widget_text sidebarBox widgetBox">
                             <h3>About Prescribing Analytics</h3>
@@ -48,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -72,13 +73,13 @@
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-36661834-1']);
             _gaq.push(['_trackPageview']);
-            
+
             (function() {
               var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
               ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-            
+
         </script>
     </body>
 </html>

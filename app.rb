@@ -7,6 +7,12 @@ require 'json'
 require 'erb'
 
 
+if ENV['LOCAL']
+  set :media_url, ""
+else
+  set :media_url, "https://s3-eu-west-1.amazonaws.com/prescribinganalytics"
+end
+
 if ENV['SENDGRID_USERNAME']
   set :static_cache_control, [:public, {:max_age => 300}]
   Pony.options = {

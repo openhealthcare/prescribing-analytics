@@ -64,7 +64,7 @@ a:hover {color: #f1532f;}
 			height: 480px;
 		}
 
-		.info {
+.info {
 			padding: 6px 8px;
 			font: 14px/16px Arial, Helvetica, sans-serif;
 			background: white;
@@ -89,4 +89,3 @@ a:hover {color: #f1532f;}
 			margin-right: 8px;
 			opacity: 0.7;
 		}
-

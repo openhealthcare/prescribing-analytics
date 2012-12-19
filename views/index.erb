@@ -43,8 +43,7 @@ The NHS has been challenged to make £20 billion in “efficiency savings” by 
     <script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/js/leaflet.js"></script>
 
 	<script type="text/javascript">
-
-		var map = L.map('map').setView([53.0, -1.5], 6);
+var map = L.map('map').setView([53.0, -1.5], 6);
 
 		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
@@ -66,11 +65,11 @@ The NHS has been challenged to make £20 billion in “efficiency savings” by 
 			this._div.innerHTML = '<h4>Proprietary Statins Prescribing</h4>'
 		+  (props ? '<b>Region: ' + props.region + '</b><br />'
 		            + '<b>CCG: ' + props.ccg_name + '</b><br />'
-		            + props.ccg_problem.toFixed(2) + '% statins proprietary'
+		            + props.ccg_problem.toFixed(2) + '% statin items proprietary'
                             + '<br />' + props.total_items_month + ' statin items per month prescribed'
                             + '<br />' + props.population + ' population'
                             + '<br />' + props.no_of_practices + ' GP Practices'
-                          : 'Hover over a Clinical Commissioning Group');
+                          : 'Hover over a Primary Care Trust');
 		};
 
 		info.addTo(map);
@@ -167,39 +166,11 @@ The NHS has been challenged to make £20 billion in “efficiency savings” by 
 
 	</script>
 
-  	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-0.js"></script>
+  	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-data.js"></script>
         <script type="text/javascript">
-	  geojson = L.geoJson(ccgData0, {
-	                      style: style,
-			      onEachFeature: onEachFeature
-                             }).addTo(map);
-	</script>
-
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-1.js"></script>
-        <script type="text/javascript">
-	  geojson = L.geoJson(ccgData1, {
-	                      style: style,
-			      onEachFeature: onEachFeature
-                             }).addTo(map);
-	</script>
-
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-2.js"></script>
-        <script type="text/javascript">
-	  geojson = L.geoJson(ccgData2, {
-	                      style: style,
-			      onEachFeature: onEachFeature
-                             }).addTo(map);
-	</script>
-
-       	<script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/prescribinganalytics/ccg-drug-data-3.js"></script>
-        <script type="text/javascript">
-	  geojson = L.geoJson(ccgData3, {
-	                      style: style,
-			      onEachFeature: onEachFeature
-                             }).addTo(map);
-	</script>
-
-
+        geojson = L.geoJson(ccgData, { style: style,
+			                           onEachFeature: onEachFeature}).addTo(map);
+        </script>
 
 
 <p><a name="note1"></a> 1.<a href="http://en.wikipedia.org/wiki/Nicholson_challenge" target="_blank">en.wikipedia.org/wiki/Nicholson_challenge</a><br />
